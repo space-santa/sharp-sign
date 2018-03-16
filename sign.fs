@@ -83,5 +83,7 @@ let makeSignString (args:string list) =
     retval <- retval + wrapLine " " length + "\n"
     retval + topBottomBorder length
 
-let args = (List.tail (Seq.toList fsi.CommandLineArgs))
-printfn "%s" <| makeSignString args
+[<EntryPoint>]
+let main args =
+    printfn "%s" <| makeSignString (Seq.toList args)
+    0
