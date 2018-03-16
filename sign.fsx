@@ -1,3 +1,5 @@
+module SharpSign
+
 open System
 
 let getConsoleWidth =
