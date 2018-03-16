@@ -4,8 +4,9 @@
   "description": "Run this with any number of strings as arguments and it will print them inside a frame. The width of the terminal is considered, strings longer than the with of the terminal are just split at maximum length.",
   "main": "sign.exe",
   "scripts": {
-    "test": "export MONO_PATH=packages/NUnit/lib/net45:packages/FsUnit/lib/net46 && npm run build-test && mono packages/NUnit.ConsoleRunner/tools/nunit3-console.exe sign.test.exe --noresult",
-    "build-test": "fsharpc --nologo -o sign.test.exe sign.test.fs -r packages/NUnit/lib/net45/nunit.framework.dll -r packages/FsUnit/lib/net46/FsUnit.NUnit.dll",
+    "test": "npm run build && npm run setMonoPath  && npm run build-test && mono packages/NUnit.ConsoleRunner/tools/nunit3-console.exe sign.test.exe --noresult",
+    "setMonoPath": "export MONO_PATH=packages/NUnit/lib/net45:packages/FsUnit/lib/net46",
+    "build-test": "fsharpc --nologo -o sign.test.exe sign.test.fs -r packages/NUnit/lib/net45/nunit.framework.dll -r packages/FsUnit/lib/net46/FsUnit.NUnit.dll -r packages/Foq/Lib/net45/Foq.dll -r sign.exe",
     "br": "npm run build && npm run run",
     "run": "mono sign.exe",
     "build": "fsharpc --nologo -o sign.exe --target:exe sign.fs",
