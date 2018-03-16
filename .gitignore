@@ -2,3 +2,5 @@
 sign
 sign_*
 *.dll
+packages
+.vscode
