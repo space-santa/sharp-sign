@@ -40,3 +40,30 @@ type TestSplitTokenAtLimit() =
         ``split zero`` () =
             (fun () -> StringOperations.splitTokenAtLimit 0 str |> ignore) |>
                 should throw typeof<System.ArgumentException>
+
+[<TestFixture>]
+type TestMakeSignString() =
+    [<Test>] member x.
+        ``empty`` () =
+            (fun () -> StringOperations.makeSignString 8 [] |> ignore) |>
+                should throw typeof<System.ArgumentException>
+
+    [<Test>] member x.
+        `` one line`` () =
+            StringOperations.makeSignString 8 ["abcd"] |>
+                should equal "+------+\n|      |\n| abcd |\n|      |\n+------+"
+
+    [<Test>] member x.
+        `` one line two tokens`` () =
+            StringOperations.makeSignString 8 ["abcd"; "e"] |>
+                should equal "+--------+\n|        |\n| abcd e |\n|        |\n+--------+"
+
+    [<Test>] member x.
+        `` two line three tokens`` () =
+            StringOperations.makeSignString 8 ["abcd"; "e"; "qwerty"] |>
+                should equal "+--------+\n|        |\n| abcd e |\n| qwerty |\n|        |\n+--------+"
+
+    [<Test>] member x.
+        `` three line three tokens long`` () =
+            StringOperations.makeSignString 8 ["abcd"; "e"; "qwertypoiu"] |>
+                should equal "+----------+\n|          |\n| abcd e   |\n| qwertypo |\n| iu       |\n|          |\n+----------+"
