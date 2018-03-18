@@ -75,6 +75,9 @@ module StringOperations =
         "+" + String.replicate (length + 2) "-" + "+"
 
     let makeSignString maxLength (args:string list) =
+        if args.IsEmpty then
+            invalidArg "args" "can't be empty"
+
         let lines = makeLimitedStrings maxLength args
         let length = longestLine lines
         let mutable retval = topBottomBorder length + "\n"
