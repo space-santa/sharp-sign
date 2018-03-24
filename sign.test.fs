@@ -49,6 +49,11 @@ type TestMakeSignString() =
                 should throw typeof<System.ArgumentException>
 
     [<Test>] member x.
+        ``empty string`` () =
+            (fun () -> StringOperations.makeSignString 8 [""] |> ignore) |>
+                should throw typeof<System.ArgumentException>
+
+    [<Test>] member x.
         `` one line`` () =
             StringOperations.makeSignString 8 ["abcd"] |>
                 should equal "+------+\n|      |\n| abcd |\n|      |\n+------+"

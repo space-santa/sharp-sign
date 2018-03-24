@@ -21,6 +21,9 @@ module StringOperations =
         if maxLength = 0 then
             invalidArg "maxLength" "can't be zero"
 
+        if token.Length = 0 then
+            invalidArg "token" "can't be an empty string"
+
         if token.Length < maxLength then
             [token]
         else
